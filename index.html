@@ -115,12 +115,16 @@
         const bpmOfDuration = bpm / (60000 / durationOfVibrate); // BPM / (60000 / 振動時間) = 振動時間の間にスマホが振動する回数
         const durationOfPause = durationOfVibrate - (bpmOfDuration * 50); // 振動時間 - (振動時間にスマホが振動する回数 * 50ミリ秒) = 振動しない時間(合計)
         const onceDurationOfPause = durationOfPause / bpmOfDuration; // 振動しない時間(合計) / スマホが振動する回数 = 振動しない時間
+        
         var pattern = [50];
+        
         while (sum(pattern) < durationOfVibrate) { // 振動時間を超えるまでバイブレーションパターンに振動する時間と振動しない時間を交互に追加していく。
             pattern.push(onceDurationOfPause);
-            pattern.push(50);
+            pattern.push(50); // 振動する時間は50ミリ秒
         }
+        
         pattern.pop(); // 末尾の50を削除
+        
         window.navigator.vibrate(pattern);
     };
 </script>
